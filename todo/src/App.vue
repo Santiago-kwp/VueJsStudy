@@ -1,7 +1,7 @@
 <script>
-import TodoHeader from './components/TodoHeader.vue';
-import TodoList from './components/TodoList.vue';
-import TodoInput from './components/TodoInput.vue';
+import TodoHeader from "./components/TodoHeader.vue";
+import TodoList from "./components/TodoList.vue";
+import TodoInput from "./components/TodoInput.vue";
 
 export default {
   components: {
@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       todos: [],
-      current: 'all',
+      current: "all",
     };
   },
 
@@ -26,23 +26,39 @@ export default {
         completed: false, // todo 완료 여부
       };
       this.todos.push(item);
+      localStorage.setItem("todos", JSON.stringify(this.todos)); // 저장
     },
     updateTab(tab) {
       this.current = tab;
     },
     deleteTodo(id) {
       this.todos = this.todos.filter((v) => v.id !== id);
+      localStorage.setItem("todos", JSON.stringify(this.todos));
     },
     updateTodo(id) {
       this.todos = this.todos.map((v) =>
         v.id === id ? { ...v, completed: !v.completed } : v
       );
+      localStorage.setItem("todos", JSON.stringify(this.todos));
     },
+    editTodo(id, newMsg) {
+      this.todos = this.todos.map((v) =>
+        v.id === id ? { ...v, msg: newMsg } : v
+      );
+      localStorage.setItem("todos", JSON.stringify(this.todos));
+    },
+  },
+
+  mounted() {
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos) {
+      this.todos = JSON.parse(savedTodos);
+    }
   },
 
   computed: {
     computedTodo() {
-      if (this.current === 'all') {
+      if (this.current === "all") {
         return this.todos;
       } else {
         return this.todos.filter((v) => v.completed);
@@ -64,6 +80,7 @@ export default {
       :computed-todo="computedTodo"
       @delete-todo="deleteTodo"
       @update-todo="updateTodo"
+      @edit-todo="editTodo"
     />
     <TodoInput @add-todo="addTodo" />
   </div>

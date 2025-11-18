@@ -2,17 +2,25 @@
 export default {
   data() {
     return {
-      inputMsg: '', // 사용자 입력한 todo 데이터 저장
+      inputMsg: "", // 사용자 입력한 todo 데이터 저장
+      isComposing: false, // 한글 조합 중인지 여부
     };
   },
 
-  emits: ['addTodo'],
+  emits: ["addTodo"],
 
   methods: {
     addTodo() {
-      // console.log(this.inputMsg);
-      this.$emit('addTodo', this.inputMsg); // 부모 컴포넌트 이벤트 호출
-      this.inputMsg = '';
+      if (this.isComposing) return; // 조합 중이면 무시
+      if (!this.inputMsg.trim()) return;
+      this.$emit("addTodo", this.inputMsg);
+      this.inputMsg = "";
+    },
+    onCompositionStart() {
+      this.isComposing = true;
+    },
+    onCompositionEnd() {
+      this.isComposing = false;
     },
   },
 };
@@ -24,7 +32,9 @@ export default {
       type="text"
       class="todo__input-text"
       placeholder="할 일을 입력하세요."
-      @keydown.enter="addTodo"
+      @keyup.enter="addTodo"
+      @compositionstart="onCompositionStart"
+      @compositionend="onCompositionEnd"
     />
     <button class="todo__input-btn" @click="addTodo">등록</button>
   </div>
