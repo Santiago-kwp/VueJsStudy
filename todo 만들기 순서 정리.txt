@@ -1,0 +1,53 @@
+기본 구조 설정하기
+npm create vue@3.10.3
+
+할일 관리 앱의 UI 구성하기
+HTML 코드 작성하기
+- todo.html 파일에서 body 태그 안 코드를 template 태그에 넣기
+- todo.html <head> 태그에 라이브러리 복사해서 index.html 파일에 붙여 넣기
+
+CSS 코드 작성하기
+- src/assets/main.css 작성하기
+
+
+컴포넌트 구분하기 
+=> html 구조 나누기
+=> *.vue 파일 만들기
+=> *.vue 파일에 html 구조 나눠서 코드 작성
+=> App.vue에서 import 하기
+=> App.vue에 components 지역등록
+=> App.vue template 안에 components 태그 넣기
+
+
+할 일 목록 입력받기
+1. 데이터를 정의하고, v-model 디렉티브로 입력창과 양방향 데이터 바인딩
+- input 태그에 v-model="newTodo"
+- 입력한 값을 확인하는 이벤트 등록 => methods에 addTodo 작성
+- emit 등록해서 App.vue에 데이터 전달 및 전달 후 초기화
+  - $emit() 함수를 사용해 자식 컴포넌트에서 부모 컴포넌트로 데이터를 전달하도록 코드 작성
+  - emits 옵션 속성과 $emit 함수를 사용해 발신하는 코드 작성
+
+2. App.vue에서 전달받은 todo를 처리하기
+- App.vue의 메소드에 addTodo 함수를 정의해서 App.vue에 todos에 TodoInput.vue에서 넘어온 데이터 추가
+
+3. 할 일 목록 필터링하기
+- 필터 데이터 정의 (filter: "all")
+- 정의한 filter 데이터를 TodoFilter 컴포넌트에 전달 (:filter="filter")
+- TodoFilter.vue에서 props를 등록하여 해당 filter값을 받음
+- filter 데이터 값을 사용해 현재 활성화 상태 정의(각 상태를 클릭하면 전달받은 filter 데이터의 값도 변경해야 함)
+- App.vue에 update-tab 이벤트 정의하고 등록=> <TodoFilter @update-tab="updateTab">
+- App.vue에 computed 옵션 속성 작성 => switch - case 문 구분해서
+
+4. 할 일 목록 출력하기
+- App.vue에서 computedTodo 데이터를 TodoList 컴포넌트로 전달
+- 부모 컴포넌트에서 전달한 computedTodo 데이터를 TodoList 컴포넌트에서 props 옵션 속성으로 받기
+
+
+
+
+
+
+
+
+
+
