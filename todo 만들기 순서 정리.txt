@@ -41,6 +41,9 @@ CSS 코드 작성하기
 4. 할 일 목록 출력하기
 - App.vue에서 computedTodo 데이터를 TodoList 컴포넌트로 전달
 - 부모 컴포넌트에서 전달한 computedTodo 데이터를 TodoList 컴포넌트에서 props 옵션 속성으로 받기
+- 전달받은 computedTodo 데이터로 할 일 목록을 출력
+- computedTodo를 반복 순회하면서 TodoItem.vue에 item으로 props 전달
+
 
 
 
