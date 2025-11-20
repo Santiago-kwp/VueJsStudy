@@ -1,22 +1,25 @@
 <script setup>
-import { ref } from 'vue';
-import AppPropsLiteral from './components/props/AppPropsLiteral.vue';
-import AppPropsObject from './components/props/AppPropsObject.vue';
-import ComponentEmitEventTemplate from './components/props/ComponentEmitEventTemplate.vue';
-import ComponentEmitEventScriptSetup from './components/props/ComponentEmitEventScriptSetup.vue';
-import MenuBar from './components/props/MenuBar.vue';
-const view = ref('');
+import { ref } from "vue";
+import AppPropsLiteral from "./components/props/AppPropsLiteral.vue";
+import AppPropsObject from "./components/props/AppPropsObject.vue";
+import ComponentEmitEventTemplate from "./components/props/ComponentEmitEventTemplate.vue";
+import ComponentEmitEventScriptSetup from "./components/props/ComponentEmitEventScriptSetup.vue";
+import MenuBar from "./components/props/MenuBar.vue";
+const view = ref("");
 const menus = ref([
-  { key: 'literal', label: 'Props Literal Demo' },
-  { key: 'obj', label: 'Props Object Demo' },
-  { key: 'template', label: 'Event Template Demo' },
-  { key: 'script', label: 'Event Script Setup Demo' },
+  { key: "literal", label: "Props Literal Demo" },
+  { key: "object", label: "Props Object Demo" },
+  { key: "template", label: "Event Template Demo" },
+  { key: "script", label: "Event Script Setup Demo" },
 ]);
+const updateView = (key) => {
+  view.value = key;
+};
 </script>
 
 <template>
   <div class="container">
-    <MenuBar :menus="menus" :view="view" />
+    <MenuBar :menus="menus" :view="view" @update-view="updateView" />
 
     <AppPropsLiteral v-if="view === 'literal'" view-title="좋아하는 과일은?" />
     <AppPropsObject

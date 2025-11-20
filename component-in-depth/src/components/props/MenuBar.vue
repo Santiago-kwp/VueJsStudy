@@ -6,7 +6,7 @@ const props = defineProps({
   },
   view: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 </script>
@@ -15,11 +15,31 @@ const props = defineProps({
   <!-- <TheHeading /> -->
   <div class="menu">
     <button
-      v-for="i in [0, 1, 2, 3]"
-      :class="{ active: view === menus[i].key }"
-      @click="view = menus[i].key"
+      v-for="menu in menus"
+      :key="menu.key"
+      :class="{ active: view === menu.key }"
+      @click="$emit('update-view', menu.key)"
     >
-      {{ menus[i].label }}
+      {{ menu.label }}
     </button>
   </div>
 </template>
+
+<style scoped>
+.container {
+  text-align: center;
+}
+.menu {
+  margin: 0.3rem 0;
+}
+button {
+  margin: 0.2rem;
+  padding: 0.5rem;
+}
+.active {
+  background-color: steelblue;
+  color: aliceblue;
+  border: 0;
+  border-radius: 5px;
+}
+</style>

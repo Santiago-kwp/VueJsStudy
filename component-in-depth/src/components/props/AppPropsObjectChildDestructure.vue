@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineEmits } from 'vue';
+import { computed } from "vue";
 
 // defineProps에서 반환된 객체에서 fruit만 빼서 f라는 이름으로 사용
 // const props = defineProps({ fruit: Object }) 와 같지만
@@ -17,7 +17,7 @@ const imgSrc = computed(() => {
   return new URL(`../../assets/${f.id}.png`, import.meta.url).href;
 });
 
-const emit = defineEmits(['show-fruit-name']);
+const emit = defineEmits(["show-fruit-name"]);
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
 // 입력값을 반응형으로 관리하기 위해 ref 사용
-import { ref, computed } from 'vue';
+import { ref, computed } from "vue";
 
 const props = defineProps({
   color: String,
@@ -12,6 +12,7 @@ const props = defineProps({
     type: Object,
     defauly: {},
   },
+  defaultMsg: String,
 });
 
 const dynamicStyles = computed(() => ({
@@ -20,9 +21,11 @@ const dynamicStyles = computed(() => ({
 }));
 
 // greet: input과 v-model로 양방향 바인딩되는 문자열 상태
-const greet = ref('');
+const greet = ref(props.defaultMsg);
 
-const name = ref('');
+const emit = defineEmits(["greeting-arg-event", "error-event"]);
+
+const name = ref("");
 </script>
 
 <template>
@@ -38,7 +41,7 @@ const name = ref('');
             -->
       <button @click="$emit('greetingEvent')" :disabled="!props.isActive">
         문제 4 - 버튼 :
-        {{ props.isActive ? '활성화됨' : '비활성화됨' }}
+        {{ props.isActive ? "활성화됨" : "비활성화됨" }}
         "인사해요"
       </button>
       <button @click="$emit('toggle-event')">문제5-토글하기</button>
@@ -59,7 +62,13 @@ const name = ref('');
                 두 번째 인자로 greet 값을 payload로 함께 보냄.
               - 템플릿 안이라서 ref 자동 언래핑 → greet는 greet.value로 전달된다고 보면 됨.
             -->
-      <button @click="$emit('greetingArgEvent', greet)">
+      <button
+        @click="
+          greet.trim().length !== 0
+            ? $emit('greeting-arg-event', greet)
+            : $emit('error-event')
+        "
+      >
         인사해요(인자전달)
       </button>
     </div>
