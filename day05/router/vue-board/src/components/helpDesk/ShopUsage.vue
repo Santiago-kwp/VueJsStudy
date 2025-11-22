@@ -1,2 +1,4 @@
 <script setup></script>
-<template></template>
+<template>
+  <h1>쇼핑몰 사용방법</h1>
+</template>

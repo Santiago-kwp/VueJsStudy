@@ -27,25 +27,32 @@
             <!-- <a class="nav-link" href="#">커뮤니티공간</a> -->
           </li>
           <li class="nav-item dropdown">
-            <router-link
-              :to="{ name: 'helpDesk' }"
+            <a
               class="nav-link dropdown-toggle"
+              href="#"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
               HELP DESK
-            </router-link>
-            <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              HELP DESK
-            </a> -->
+            </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">공지사항</a></li>
-              <li><a class="dropdown-item" href="#">FAQ</a></li>
+              <li>
+                <router-link :to="{ name: 'announce-list' }" class="dropdown-item"
+                  >공지사항</router-link
+                >
+              </li>
+              <li>
+                <router-link :to="{ name: 'faq' }" class="dropdown-item"> FAQ</router-link>
+              </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
-              <li><a class="dropdown-item" href="#">매장이용안내</a></li>
+              <li>
+                <router-link :to="{ name: 'shop-usage' }" class="dropdown-item">
+                  매장이용안내
+                </router-link>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

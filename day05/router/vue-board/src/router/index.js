@@ -41,19 +41,27 @@ const router = createRouter({
       ],
     },
     {
-      path: "/announceList",
-      name: "announce-list",
-      component: () => import("@/components/helpDesk/AnnounceList.vue"),
-    },
-    {
-      path: "/faq",
-      name: "faq",
-      component: () => import("@/components/helpDesk/FAQ.vue"),
-    },
-    {
-      path: "/shopUsage",
-      name: "shopUsage",
-      component: () => import("@/components/helpDesk/ShopUsage.vue"),
+      path: "/helpDesk",
+      name: "help-desk",
+      component: () => import("../views/HelpDeskView.vue"),
+      redirect: { name: "announce-list" },
+      children: [
+        {
+          path: "/announceList",
+          name: "announce-list",
+          component: () => import("@/components/helpDesk/AnnounceList.vue"),
+        },
+        {
+          path: "/faq",
+          name: "faq",
+          component: () => import("@/components/helpDesk/FAQ.vue"),
+        },
+        {
+          path: "/shopUsage",
+          name: "shop-usage",
+          component: () => import("@/components/helpDesk/ShopUsage.vue"),
+        },
+      ],
     },
   ],
 });

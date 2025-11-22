@@ -1,2 +1,4 @@
 <script setup></script>
-<template></template>
+<template>
+  <h1>FAQ</h1>
+</template>
